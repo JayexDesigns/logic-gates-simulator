@@ -1,0 +1,24 @@
+body, body * {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1a1a;
+}
+
+
+
+#canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
