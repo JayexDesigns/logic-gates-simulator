@@ -110,13 +110,13 @@ class LogicGate {
         for (let i = 0; i < Input.inputs.length; ++i) {
             if (Input.inputs[i].fixed) {
                 inputs.push(Input.inputs[i]);
-                table[`i${i}`] = [];
+                table[`i${inputs.length-1}`] = [];
             }
         }
         for (let i = 0; i < Output.outputs.length; ++i) {
             if (Output.outputs[i].fixed) {
                 outputs.push(Output.outputs[i]);
-                table[`o${i}`] = [];
+                table[`o${outputs.length-1}`] = [];
             }
         }
 
