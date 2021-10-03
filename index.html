@@ -13,7 +13,7 @@
 <body onload="handleLoad()">
     <p id="betaTag" class="unselectable">BETA</p>
     <div id="logicGateCreator">
-        <input id="gateName" class="unselectable" type="text">
+        <input id="gateName" class="unselectable" type="text" placeholder="Name Of The Gate">
         <button id="createGate" class="unselectable">CREATE</button>
     </div>
     <div id="logicGateSelector">
@@ -24,6 +24,14 @@
         <button id="import" class="unselectable">IMPORT</button>
         <button id="export" class="unselectable">EXPORT</button>
         <button id="clear" class="unselectable">CLEAR</button>
+    </div>
+    <div id="inputControls">
+        <button class="unselectable" id="addInput">+</button>
+        <button class="unselectable" id="removeInput">-</button>
+    </div>
+    <div id="outputControls">
+        <button class="unselectable" id="addOutput">+</button>
+        <button class="unselectable" id="removeOutput">-</button>
     </div>
     <canvas id="canvas"></canvas>
     <script src="js/input.js"></script>

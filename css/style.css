@@ -59,6 +59,24 @@ body {
 #controls > button {
     margin: 0.5rem 0;
 }
+#inputControls, #outputControls {
+    position: absolute;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+#inputControls {
+    left: 1rem;
+}
+#outputControls {
+    right: 1rem;
+}
+#inputControls > button, #outputControls > button {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    padding: 0.3rem 0.7rem;
+}
 button, input {
     background-color: rgba(26, 26, 26, 0);
     color: #ffffff;

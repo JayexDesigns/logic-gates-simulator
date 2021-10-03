@@ -91,8 +91,8 @@ const overlapHandler = (x, y, lastX, lastY, button) => {
             firstOverlap["element"].removeConnection();
         }
     }
-    else {
-        new LogicGate(ctx, x, y, gateSelected);
+    else if (button == 0) {
+        new LogicGate(ctx, x, y, gateSelected, triangleSideLen, triangleSeparation);
     }
 }
 
@@ -127,6 +127,36 @@ const clear = () => {
 }
 
 document.getElementById("clear").addEventListener('click', () => clear());
+
+
+
+const addInput = () => {
+    let pos = [];
+    for (let i = 0; i < Input.inputs.length; ++i) {
+        if (Input.inputs[Input.inputs.length-i-1].fixed) {
+            pos.push(Input.inputs[Input.inputs.length-i-1].posX);
+            pos.push(Input.inputs[Input.inputs.length-i-1].posY);
+        }
+    }
+    inputQuantity++;
+    new Input(ctx, pos[0], pos[1]+triangleSideLen+triangleSeparation, triangleSideLen, true);
+    draw();
+}
+document.getElementById("addInput").addEventListener('click', addInput);
+
+const addOutput = () => {
+    let pos = [];
+    for (let i = 0; i < Output.outputs.length; ++i) {
+        if (Output.outputs[Output.outputs.length-i-1].fixed) {
+            pos.push(Output.outputs[Output.outputs.length-i-1].posX);
+            pos.push(Output.outputs[Output.outputs.length-i-1].posY);
+        }
+    }
+    outputQuantity++;
+    new Output(ctx, pos[0], pos[1]+triangleSideLen+triangleSeparation, triangleSideLen, true);
+    draw();
+}
+document.getElementById("addOutput").addEventListener('click', addOutput);
 
 
 
