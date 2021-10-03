@@ -104,4 +104,13 @@ class Input {
         }
         draw();
     }
+
+    remove() {
+        this.removeConnection();
+        for (let i = 0; i < Input.inputs.length; ++i) {
+            if (Input.inputs[i] === this) {
+                Input.inputs.splice(i, 1);
+            }
+        }
+    }
 }

@@ -144,4 +144,12 @@ class LogicGate {
             buttons[i].addEventListener('click', changeGateSelected);
         }
     }
+
+    remove() {
+        for (let i = 0; i < LogicGate.gates.length; ++i) {
+            if (LogicGate.gates[i] === this) {
+                LogicGate.gates.splice(i, 1);
+            }
+        }
+    }
 }

@@ -86,4 +86,13 @@ class Output {
         }
         draw();
     }
+
+    remove() {
+        this.removeConnection();
+        for (let i = 0; i < Output.outputs.length; ++i) {
+            if (Output.outputs[i] === this) {
+                Output.outputs.splice(i, 1);
+            }
+        }
+    }
 }

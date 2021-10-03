@@ -102,24 +102,31 @@ new Mouse(overlapHandler);
 
 document.getElementById("createGate").addEventListener('click', () => {
     let name = document.getElementById("gateName").value;
-    let color = "#00ccff";
+    document.getElementById("gateName").value = "";
+    let colors = ["#00ccff", "#004d7a", "#00bf72", "#ff8f00", "#512da8", "#2276bc", "#30b1ad", "#dc1c4b", "#8fc23f", "#06d6a0", "#ef476f", "#7400b8", "#ffc300", "#ba181b", "#007f5f", "#f15bb5"];
+    let color = colors[Math.floor(Math.random() * (colors.length-1))];
     LogicGate.createGate(name, color);
+    clear();
 });
 
 
 
 const clear = () => {
     boundings = [];
-    for (let i = 0; i < Input.inputs.length; ++i) {
-        Input.inputs[i].remove();
+    while (Input.inputs.length > 0) {
+        Input.inputs[0].remove();
     }
-    for (let i = 0; i < Output.outputs.length; ++i) {
-        Output.outputs[i].remove();
+    while (Output.outputs.length > 0) {
+        Output.outputs[0].remove();
     }
-    for (let i = 0; i < LogicGate.gates.length; ++i) {
-        LogicGate.gates[i].remove();
+    while (LogicGate.gates.length > 0) {
+        LogicGate.gates[0].remove();
     }
+    createInputsAndOutputs();
+    draw();
 }
+
+document.getElementById("clear").addEventListener('click', () => clear());
 
 
 
