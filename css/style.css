@@ -48,6 +48,17 @@ body {
     align-items: center;
     z-index: 1;
 }
+#controls {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+#controls > button {
+    margin: 0.5rem 0;
+}
 button, input {
     background-color: rgba(26, 26, 26, 0);
     color: #ffffff;

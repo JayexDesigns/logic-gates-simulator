@@ -12,11 +12,12 @@ const resizeCanvas = () => {
 
 
 var gateSelected = "AND";
+const changeGateSelected = (e) => {
+    gateSelected = e.target.innerText;
+};
 var buttons = document.getElementsByClassName("buttonSelector");
 for (let i = 0; i < buttons.length; ++i) {
-    buttons[i].addEventListener('click', () => {
-        gateSelected = buttons[i].innerText;
-    });
+    buttons[i].addEventListener('click', changeGateSelected);
 }
 
 var inputQuantity = 2;
@@ -26,16 +27,19 @@ var triangleSeparation = 25;
 
 var boundings = [];
 
-for (let i = 0; i < inputQuantity; ++i) {
-    factor = i - (inputQuantity/2 - 0.5);
-    let startPoint = [0, innerHeight/2 - triangleSideLen/2 + triangleSideLen * factor + factor * triangleSeparation];
-    new Input(ctx, startPoint[0], startPoint[1], triangleSideLen, true);
+const createInputsAndOutputs = () => {
+    for (let i = 0; i < inputQuantity; ++i) {
+        factor = i - (inputQuantity/2 - 0.5);
+        let startPoint = [0, innerHeight/2 - triangleSideLen/2 + triangleSideLen * factor + factor * triangleSeparation];
+        new Input(ctx, startPoint[0], startPoint[1], triangleSideLen, true);
+    }
+    for (let i = 0; i < outputQuantity; ++i) {
+        factor = i - (outputQuantity/2 - 0.5);
+        let startPoint = [innerWidth, innerHeight/2 - triangleSideLen/2 + triangleSideLen * factor + factor * triangleSeparation];
+        new Output(ctx, startPoint[0], startPoint[1], triangleSideLen, true);
+    }
 }
-for (let i = 0; i < outputQuantity; ++i) {
-    factor = i - (outputQuantity/2 - 0.5);
-    let startPoint = [innerWidth, innerHeight/2 - triangleSideLen/2 + triangleSideLen * factor + factor * triangleSeparation];
-    new Output(ctx, startPoint[0], startPoint[1], triangleSideLen, true);
-}
+createInputsAndOutputs();
 
 
 
@@ -101,6 +105,21 @@ document.getElementById("createGate").addEventListener('click', () => {
     let color = "#00ccff";
     LogicGate.createGate(name, color);
 });
+
+
+
+const clear = () => {
+    boundings = [];
+    for (let i = 0; i < Input.inputs.length; ++i) {
+        Input.inputs[i].remove();
+    }
+    for (let i = 0; i < Output.outputs.length; ++i) {
+        Output.outputs[i].remove();
+    }
+    for (let i = 0; i < LogicGate.gates.length; ++i) {
+        LogicGate.gates[i].remove();
+    }
+}
 
 
 

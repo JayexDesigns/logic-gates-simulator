@@ -139,8 +139,9 @@ class LogicGate {
         }
         document.getElementById("logicGateSelector").innerHTML += `<button class="buttonSelector unselectable">${name}</button>`;
         let buttons = document.getElementsByClassName("buttonSelector");
-        buttons[buttons.length-1].addEventListener('click', () => {
-            gateSelected = buttons[buttons.length-1].innerText;
-        });
+        for (let i = 0; i < buttons.length; ++i) {
+            buttons[i].removeEventListener('click', changeGateSelected);
+            buttons[i].addEventListener('click', changeGateSelected);
+        }
     }
 }
