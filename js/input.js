@@ -17,7 +17,8 @@ class Input {
             this.posX + this.height,
             this.posY + this.sideLength
         ];
-        boundings.push({type: "fixedInput", element: this});
+        if (this.fixed) boundings.push({type: "fixedInput", element: this});
+        else if (!this.fixed) boundings.push({type: "gateInput", element: this});
         Input.inputs.push(this);
     }
 

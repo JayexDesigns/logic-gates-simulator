@@ -11,8 +11,16 @@ const resizeCanvas = () => {
 
 
 
-var inputQuantity = 5;
-var outputQuantity = 3;
+var gateSelected = "AND";
+var buttons = document.getElementsByClassName("buttonSelector");
+for (let i = 0; i < buttons.length; ++i) {
+    buttons[i].addEventListener('click', () => {
+        gateSelected = buttons[i].innerText;
+    });
+}
+
+var inputQuantity = 3;
+var outputQuantity = 2;
 var triangleSideLen = 30;
 var triangleSeparation = 25;
 
@@ -64,7 +72,12 @@ const overlapHandler = (x, y, lastX, lastY, button) => {
                 return;
             }
 
-            else if (firstOverlap["type"] === "fixedInput" && secondOverlap["type"] === "fixedOutput") {
+            else if (
+                (firstOverlap["type"] === "fixedInput" ||
+                firstOverlap["type"] === "gateInput") &&
+                (secondOverlap["type"] === "fixedOutput" ||
+                secondOverlap["type"] === "gateOutput")
+            ) {
                 secondOverlap["element"].addConnection(firstOverlap);
                 firstOverlap["element"].addConnection(secondOverlap);
                 return;
@@ -75,7 +88,7 @@ const overlapHandler = (x, y, lastX, lastY, button) => {
         }
     }
     if (button === 1) {
-        new LogicGate(ctx, x, y, 2, 1, "AND", "AND");
+        new LogicGate(ctx, x, y, gateSelected);
     }
 }
 

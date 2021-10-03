@@ -1,13 +1,15 @@
 class Output {
     static outputs = [];
 
-    constructor(ctx, posX, posY, sideLength, fixed=true) {
+    constructor(ctx, posX, posY, sideLength, fixed=true, gate=null, element=null) {
         this.ctx = ctx;
         this.posX = posX;
         this.posY = posY;
         this.sideLength = sideLength;
         this.height = Math.sqrt(this.sideLength ** 2 - (this.sideLength/2) ** 2);
         this.fixed = fixed;
+        this.gate = gate;
+        this.element = element;
         this.state = 0;
         this.connectionsState = 0;
         this.connections = [];
@@ -17,7 +19,8 @@ class Output {
             this.posX,
             this.posY + this.sideLength
         ];
-        boundings.push({type: "fixedOutput", element: this});
+        if (this.fixed) boundings.push({type: "fixedOutput", element: this});
+        else if (!this.fixed) boundings.push({type: "gateOutput", element: this});
         Output.outputs.push(this);
     }
 
@@ -36,6 +39,7 @@ class Output {
     }
 
     changeState(state = null) {
+        let previousState = this.state;
         if (state === null) {
             if (this.state === 0) this.state = 1;
             else if (this.state === 1) this.state = 0;
@@ -53,9 +57,8 @@ class Output {
             else this.state = 0;
             draw();
         }
-        let current = 0;
-        for (let i = 0; i < Output.outputs.length; ++i) {
-            if (Output.outputs[i] === this) current = i;
+        if (!this.fixed && this.state != previousState) {
+            LogicGate.gates[this.gate].updateInputs(this.element, this.state);
         }
     }
 
