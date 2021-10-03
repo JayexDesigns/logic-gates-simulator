@@ -29,17 +29,14 @@ var boundings = [];
 
 const createInputsAndOutputs = () => {
     for (let i = 0; i < inputQuantity; ++i) {
-        factor = i - (inputQuantity/2 - 0.5);
-        let startPoint = [0, innerHeight/2 - triangleSideLen/2 + triangleSideLen * factor + factor * triangleSeparation];
-        new Input(ctx, startPoint[0], startPoint[1], triangleSideLen, true);
+        new Input(ctx, 0, 0, triangleSideLen, triangleSeparation, true);
     }
+    Input.sort();
     for (let i = 0; i < outputQuantity; ++i) {
-        factor = i - (outputQuantity/2 - 0.5);
-        let startPoint = [innerWidth, innerHeight/2 - triangleSideLen/2 + triangleSideLen * factor + factor * triangleSeparation];
-        new Output(ctx, startPoint[0], startPoint[1], triangleSideLen, true);
+        new Output(ctx, 0, 0, triangleSideLen, triangleSeparation, true);
     }
+    Output.sort();
 }
-createInputsAndOutputs();
 
 
 
@@ -139,10 +136,32 @@ const addInput = () => {
         }
     }
     inputQuantity++;
-    new Input(ctx, pos[0], pos[1]+triangleSideLen+triangleSeparation, triangleSideLen, true);
+    new Input(ctx, pos[0], pos[1]+triangleSideLen+triangleSeparation, triangleSideLen, triangleSeparation, true);
+    Input.sort();
     draw();
 }
 document.getElementById("addInput").addEventListener('click', addInput);
+
+const removeInput = () => {
+    for (let i = 0; i < Input.inputs.length; ++i) {
+        if (Input.inputs[Input.inputs.length-i-1].fixed) {
+            let input = Input.inputs[Input.inputs.length-i-1];
+            for (let j = 0; j < boundings.length; ++j) {
+                if (boundings.element === input) {
+                    boundings.splice(j, 1);
+                    break;
+                }
+            }
+            input.remove();
+            break;
+        }
+    }
+    inputQuantity--;
+    Input.sort();
+    draw();
+}
+document.getElementById("removeInput").addEventListener('click', removeInput);
+
 
 const addOutput = () => {
     let pos = [];
@@ -153,10 +172,31 @@ const addOutput = () => {
         }
     }
     outputQuantity++;
-    new Output(ctx, pos[0], pos[1]+triangleSideLen+triangleSeparation, triangleSideLen, true);
+    new Output(ctx, pos[0], pos[1]+triangleSideLen+triangleSeparation, triangleSideLen, triangleSeparation, true);
+    Output.sort();
     draw();
 }
 document.getElementById("addOutput").addEventListener('click', addOutput);
+
+const removeOutput = () => {
+    for (let i = 0; i < Output.outputs.length; ++i) {
+        if (Output.outputs[Output.outputs.length-i-1].fixed) {
+            let output = Output.outputs[Output.outputs.length-i-1];
+            for (let j = 0; j < boundings.length; ++j) {
+                if (boundings.element === output) {
+                    boundings.splice(j, 1);
+                    break;
+                }
+            }
+            output.remove();
+            break;
+        }
+    }
+    outputQuantity--;
+    Output.sort();
+    draw();
+}
+document.getElementById("removeOutput").addEventListener('click', removeOutput);
 
 
 
@@ -179,4 +219,6 @@ const draw = () => {
 const handleLoad = () => {
     resizeCanvas();
     window.addEventListener('resize', () => resizeCanvas());
+    createInputsAndOutputs();
+    draw();
 };

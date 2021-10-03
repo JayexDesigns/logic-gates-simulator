@@ -18,13 +18,13 @@ class LogicGate {
         },
     };
 
-    constructor(ctx, posX, posY, name, triangleSideLen, triangleSeparation) {
+    constructor(ctx, posX, posY, name, sideLength, separation) {
         this.ctx = ctx;
         this.posX = posX;
         this.posY = posY;
         this.name = name;
-        this.triangleSideLen = triangleSideLen;
-        this.triangleSeparation = triangleSeparation;
+        this.sideLength = sideLength;
+        this.separation = separation;
         this.color = LogicGate.gateData[name]["color"];
         this.fontSize = 25;
         this.xFrameOffset = 10;
@@ -44,11 +44,11 @@ class LogicGate {
         for (let element in this.table) {
             if (element[0] == "i") {
                 let pos = parseInt(element[1]);
-                new Output(ctx, this.posX-this.xFrameOffset, this.posY-size[1]/2-size[2]/2 + (pos * this.triangleSideLen + pos * this.triangleSeparation), this.triangleSideLen, false, this.gate, pos);
+                new Output(ctx, this.posX-this.xFrameOffset, this.posY-size[1]/2-size[2]/2 + (pos * this.sideLength + pos * this.separation), this.sideLength, this.separation, false, this.gate, pos);
             }
             else if (element[0] == "o") {
                 let pos = parseInt(element[1]);
-                let output = new Input(ctx, this.posX+size[0]+this.xFrameOffset, this.posY-size[1]/2-size[2]/2 + (pos * this.triangleSideLen + pos * this.triangleSeparation), this.triangleSideLen, false);
+                let output = new Input(ctx, this.posX+size[0]+this.xFrameOffset, this.posY-size[1]/2-size[2]/2 + (pos * this.sideLength + pos * this.separation), this.sideLength, this.separation, false);
                 this.outputsRef.push(output);
             }
         }
@@ -63,7 +63,7 @@ class LogicGate {
         let width = metrics.width;
         let textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
         let maxElements = (this.inputs.length >= this.outputs.length) ? this.inputs.length : this.outputs.length;
-        let elementsHeight = maxElements*this.triangleSideLen + (maxElements-1)*this.triangleSeparation;
+        let elementsHeight = maxElements*this.sideLength + (maxElements-1)*this.separation;
         ctx.fillRect(
             this.posX - this.xFrameOffset,
             this.posY - textHeight - elementsHeight/2 - this.yFrameOffset,

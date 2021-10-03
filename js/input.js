@@ -1,11 +1,12 @@
 class Input {
     static inputs = [];
 
-    constructor(ctx, posX, posY, sideLength, fixed=true) {
+    constructor(ctx, posX, posY, sideLength, separation, fixed=true) {
         this.ctx = ctx;
         this.posX = posX;
         this.posY = posY;
         this.sideLength = sideLength;
+        this.separation = separation;
         this.height = Math.sqrt(this.sideLength ** 2 - (this.sideLength/2) ** 2);
         this.fixed = fixed;
         this.state = 0;
@@ -53,6 +54,28 @@ class Input {
             );
             ctx.stroke();
         }
+    }
+
+    static sort() {
+        let inputs = [];
+        for (let i = 0; i < Input.inputs.length; ++i) {
+            if (Input.inputs[i].fixed) {
+                inputs.push(Input.inputs[i]);
+            }
+        }
+        for (let i = 0; i < inputs.length; ++i) {
+            let factor = i - (inputs.length/2 - 0.5);
+            let startPoint = [0, innerHeight/2 - inputs[i].sideLength/2 + inputs[i].sideLength * factor + factor * inputs[i].separation];
+            inputs[i].posX = startPoint[0];
+            inputs[i].posY = startPoint[1];
+            inputs[i].boundingBox = [
+                inputs[i].posX,
+                inputs[i].posY,
+                inputs[i].posX + inputs[i].height,
+                inputs[i].posY + inputs[i].sideLength
+            ];
+        }
+        draw();
     }
 
     changeState(state = null) {

@@ -1,11 +1,12 @@
 class Output {
     static outputs = [];
 
-    constructor(ctx, posX, posY, sideLength, fixed=true, gate=null, element=null) {
+    constructor(ctx, posX, posY, sideLength, separation, fixed=true, gate=null, element=null) {
         this.ctx = ctx;
         this.posX = posX;
         this.posY = posY;
         this.sideLength = sideLength;
+        this.separation = separation;
         this.height = Math.sqrt(this.sideLength ** 2 - (this.sideLength/2) ** 2);
         this.fixed = fixed;
         this.gate = gate;
@@ -36,6 +37,28 @@ class Output {
         this.ctx.lineTo(this.posX - this.height, this.posY + this.sideLength/2);
         ctx.lineTo(this.posX, this.posY + this.sideLength);
         ctx.fill();
+    }
+
+    static sort() {
+        let outputs = [];
+        for (let i = 0; i < Output.outputs.length; ++i) {
+            if (Output.outputs[i].fixed) {
+                outputs.push(Output.outputs[i]);
+            }
+        }
+        for (let i = 0; i < outputs.length; ++i) {
+            let factor = i - (outputQuantity/2 - 0.5);
+            let startPoint = [innerWidth, innerHeight/2 - outputs[i].sideLength/2 + outputs[i].sideLength * factor + factor * outputs[i].separation];
+            outputs[i].posX = startPoint[0];
+            outputs[i].posY = startPoint[1];
+            outputs[i].boundingBox = [
+                outputs[i].posX - outputs[i].height,
+                outputs[i].posY,
+                outputs[i].posX,
+                outputs[i].posY + outputs[i].sideLength
+            ];
+        }
+        draw();
     }
 
     changeState(state = null) {
