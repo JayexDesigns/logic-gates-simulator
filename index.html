@@ -11,13 +11,14 @@
     <title>Logic Gates Simulator</title>
 </head>
 <body onload="handleLoad()">
+    <p id="betaTag">BETA</p>
     <div id="logicGateCreator">
-        <input type="text">
-        <button>CREATE</button>
+        <input id="gateName" type="text">
+        <button id="createGate" class="unselectable">CREATE</button>
     </div>
     <div id="logicGateSelector">
-        <button class="buttonSelector">AND</button>
-        <button class="buttonSelector">NOT</button>
+        <button class="buttonSelector unselectable">AND</button>
+        <button class="buttonSelector unselectable">NOT</button>
     </div>
     <canvas id="canvas"></canvas>
     <script src="js/input.js"></script>

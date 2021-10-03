@@ -100,4 +100,47 @@ class LogicGate {
         this.inputs[output] = state;
         this.logic();
     }
+
+    static createGate(name, color) {
+        let table = {};
+        let inputs = [];
+        let outputs = [];
+        for (let i = 0; i < Input.inputs.length; ++i) {
+            if (Input.inputs[i].fixed) {
+                inputs.push(Input.inputs[i]);
+                table[`i${i}`] = [];
+            }
+        }
+        for (let i = 0; i < Output.outputs.length; ++i) {
+            if (Output.outputs[i].fixed) {
+                outputs.push(Output.outputs[i]);
+                table[`o${i}`] = [];
+            }
+        }
+
+        for (let i = 0; i < 2**inputs.length; ++i) {
+            let bin = i.toString(2);
+            while (bin.length < inputs.length) {
+                bin = `0${bin}`;
+            }
+            for (let j = 0; j < bin.length; ++j) {
+                inputs[j].changeState(parseInt(bin[bin.length-j-1]));
+                table[`i${j}`].push(parseInt(bin[bin.length-j-1]));
+            }
+            draw();
+            for (let j = 0; j < outputs.length; ++j) {
+                table[`o${j}`].push(outputs[j].state);
+            }
+        }
+
+        LogicGate.gateData[name] = {
+            color: color,
+            table: table,
+        }
+        document.getElementById("logicGateSelector").innerHTML += `<button class="buttonSelector unselectable">${name}</button>`;
+        let buttons = document.getElementsByClassName("buttonSelector");
+        buttons[buttons.length-1].addEventListener('click', () => {
+            gateSelected = buttons[buttons.length-1].innerText;
+        });
+    }
 }

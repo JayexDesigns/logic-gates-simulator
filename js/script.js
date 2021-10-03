@@ -19,8 +19,8 @@ for (let i = 0; i < buttons.length; ++i) {
     });
 }
 
-var inputQuantity = 3;
-var outputQuantity = 2;
+var inputQuantity = 2;
+var outputQuantity = 1;
 var triangleSideLen = 30;
 var triangleSeparation = 25;
 
@@ -87,12 +87,20 @@ const overlapHandler = (x, y, lastX, lastY, button) => {
             firstOverlap["element"].removeConnection();
         }
     }
-    if (button === 1) {
+    else {
         new LogicGate(ctx, x, y, gateSelected);
     }
 }
 
 new Mouse(overlapHandler);
+
+
+
+document.getElementById("createGate").addEventListener('click', () => {
+    let name = document.getElementById("gateName").value;
+    let color = "#00ccff";
+    LogicGate.createGate(name, color);
+});
 
 
 

@@ -64,11 +64,41 @@ input {
 button {
     cursor: pointer;
 }
+#logicGateSelector > button {
+    margin: 0.5rem 1rem;
+}
 button:hover, input:hover {
     background-color: #ffffff;
     color: #1a1a1a;
 }
 
+
+
+#betaTag {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    display: inline-block;
+    background-color: #ff008c;
+    padding: 0.4rem 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    transform: skew(0, -10deg);
+    z-index: 1;
+}
+
+
+
+
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 
 
