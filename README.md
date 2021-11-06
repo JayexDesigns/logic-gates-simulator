@@ -16,4 +16,4 @@ Once you're done making the circuit you can give it a name and compact it in the
 If you want to reset the circuit you can click the clear button, the import and export buttons don't have a use yet.
 </p>
 <br/>
-<h2 align="center"><a href="https://jayexdesigns.github.io/web-solar-system/">TRY IT!</a></h2>
+<h2 align="center"><a href="https://jayexdesigns.github.io/logic-gates-simulator/">TRY IT!</a></h2>
