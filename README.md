@@ -1,6 +1,6 @@
 <h3 align="center"><img src='https://raw.githubusercontent.com/JayexDesigns/logic-gates-simulator/main/assets/logo.png' width='15%'></h3>
 <h1 align="center">Logic Gates Simulator</h1>
-<p align="center">I wanted to make my own logic gates simulator, although it's a little bit buggy and is still a beta version I'm pretty happy with the result</p>
+<p align="center">A logic gates simulator, still kind of buggy and in beta version</p>
 <br/>
 <h2>Usage</h2>
 <p>Before trying to use it please make sure you understand the bases of the logic gates and simple operations with binary numbers.
